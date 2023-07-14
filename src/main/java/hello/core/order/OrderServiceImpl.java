@@ -1,18 +1,18 @@
 package hello.core.order;
 
 import hello.core.discount.DiscountPolicy;
-import hello.core.discount.FixDiscountPolicy;
-import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 
-public class OrderSerivceImpl implements OrderService {
+public class OrderServiceImpl implements OrderService {
     // 회원 찾기
     private final MemberRepository memberRepository = new MemoryMemberRepository(); // DIP 위반
     // 할인 정책
 //    DiscountPolicy discountPolicy = new FixDiscountPolicy(); // 변경하는 순간 OCP 위반
-    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반(추상, 구현체에도 의존)
+//    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반(추상, 구현체에도 의존)
+    private DiscountPolicy discountPolicy; // NullPointerException
+
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {

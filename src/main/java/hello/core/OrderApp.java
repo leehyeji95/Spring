@@ -5,13 +5,13 @@ import hello.core.member.Member;
 import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import hello.core.order.Order;
-import hello.core.order.OrderSerivceImpl;
+import hello.core.order.OrderServiceImpl;
 import hello.core.order.OrderService;
 
 public class OrderApp {
     public static void main(String[] args) {
         MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderSerivceImpl();
+        OrderService orderService = new OrderServiceImpl();
 
         Long memberId = 1L;
         Member member = new Member(memberId, "memberA", Grade.VIP);
