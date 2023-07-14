@@ -7,12 +7,19 @@ import hello.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService {
     // 회원 찾기
-    private final MemberRepository memberRepository = new MemoryMemberRepository(); // DIP 위반
+//    private final MemberRepository memberRepository = new MemoryMemberRepository(); // DIP 위반
     // 할인 정책
 //    DiscountPolicy discountPolicy = new FixDiscountPolicy(); // 변경하는 순간 OCP 위반
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반(추상, 구현체에도 의존)
-    private DiscountPolicy discountPolicy; // NullPointerException
 
+    // final 키워드 -> 생성자를 사용해서 기본으로 할당 돼있어야 한다.
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
