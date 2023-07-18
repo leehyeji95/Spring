@@ -2,7 +2,7 @@
 ApplicationContext : 스프링 컨테이너, 인터페이스(다형성)
 기존에는 AppConfig 를 사용해서 직접 객체를 생성하고 DI를 했지만, 스프링컨테이너를 사용할 것
 스프링 컨테이너는 @Configuration 이 붙은 AppConfig 를 구성정보로 사용한다.
-@Bean이라 적힌 메서드를 모두 호출해서 반환된 객체를 스프링 컨테이너에 등록하고 이를 스프링 빈이라고 한다.
+@Bean 이라 적힌 메서드를 모두 호출해서 반환된 객체를 스프링 컨테이너에 등록하고 이를 스프링 빈이라고 한다.
 @Bean 이 붙은 메서드의 명을 스프링 빈의 이름으로 사용한다.
 
 AnnotationApplicationContext 는 ApplicationContext 의 구현체이다.
@@ -32,3 +32,7 @@ AnnotationApplicationContext 는 ApplicationContext 의 구현체이다.
 - 특정 클라이언트가 값을 변경할 수 있는 필드가 있으면 안된다
 - 가급적 읽기만 가능해야한다
 - 필드 대신에 자바에서 공유되지 않는 지역변수, 파라미터, ThreadLocal 등을 사용해야한다.
+
+@ComponentScan 은 @Component 가 붙은 모든 클래스를 스프링 빈으로 등록한다.
+이때 스프링 빈의 기본 이름은 클래스면을 사용하되 맨 앞글자만 소문자를 사용한다.
+직접 지정도 가능함. @Component("memberService")
