@@ -36,3 +36,13 @@ AnnotationApplicationContext 는 ApplicationContext 의 구현체이다.
 @ComponentScan 은 @Component 가 붙은 모든 클래스를 스프링 빈으로 등록한다.
 이때 스프링 빈의 기본 이름은 클래스면을 사용하되 맨 앞글자만 소문자를 사용한다.
 직접 지정도 가능함. @Component("memberService")
+
+스프링 부트 사용 시, 대표 시작 정보인 @SpringBootApplication 을 루트에 두고 -> 이 설정 안에 @ComponentScan 들어있다.
+* 컴포넌트 스캔 기본 대상 (자동)
+@Component : 컴포넌트 스캔에서 사용
+@Controller : 스프링 MVC 컨트롤러에서 사용 + MVC 컨트롤러로 인식
+@Service : 스프링 비즈니스 로직에서 사용
+@Repository : 스프링 데이터 접근 계층에서 사용 + 스프링 데이터 접근 계층으로 인식하고, 데이터 계층의 예외를 스프링 예외로 변환
+@Configuration : 스프링 설정 정보에서 사용 + 스프링 빈이 싱글톤으로 유지하도록 추가 처리
+
+* 참고 : 어노테이션은 자바 기능이 아니고 스프링 기능이다! 상속관계 없음
