@@ -15,12 +15,39 @@ public class OrderServiceImpl implements OrderService {
 //    DiscountPolicy discountPolicy = new FixDiscountPolicy(); // 변경하는 순간 OCP 위반
 //    private final DiscountPolicy discountPolicy = new RateDiscountPolicy(); // DIP 위반(추상, 구현체에도 의존)
 
-    // final 키워드 -> 생성자를 사용해서 기본으로 할당 돼있어야 한다.
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
+    // final 키워드 -> 생성자를 사용해서 기본으로 할당 돼있어야 한다. (생성자 주입 시)
+    // 수정자 주입(setter) 시, final 키워드 없어야함
+    private  MemberRepository memberRepository;
+    private  DiscountPolicy discountPolicy;
+
+/*
+    // 수정자 주입 -> 자바코드
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        // setter 쓰기 위해서 멤버 변수 private final -> final 키워드 없어야함
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+
 
     @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy){
+        System.out.println("discountPolicy = " +discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
+
+ */
+
+
+    @Autowired  // 생성자 주입
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+
+    // 일반 메서드 자동주입
+    @Autowired
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
@@ -37,4 +64,6 @@ public class OrderServiceImpl implements OrderService {
     public MemberRepository getMemberRepository() {
         return memberRepository;
     }
+
+
 }
